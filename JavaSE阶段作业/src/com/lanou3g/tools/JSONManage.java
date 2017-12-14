@@ -1,5 +1,6 @@
 package com.lanou3g.tools;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.junit.Test;
 
@@ -93,9 +94,9 @@ public class JSONManage {
 
     }
     @Test
-    public  void inquiry() throws IOException {
+    public static   void inquiry() throws IOException {
 
-        URL url = new URL("http://192.168.20.221:8080/day16/ten");
+        URL url = new URL("http://192.168.20.194:8080/day16/ten");
 
         InputStream coon = url.openStream();
 
@@ -104,26 +105,29 @@ public class JSONManage {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
 
-        try {
+
             byte buf[] = new byte[1024];
             int read = 0;
             while ((read = coon.read(buf)) > 0) {
                 out.write(buf, 0, read);
-            }
-        } finally {
+
+        }
             if (coon != null) {
                 coon.close();
             }
-        }
+
 
         byte[] b = out.toByteArray();
 
         String str = new String(b);
+        JSONArray array = JSONArray.fromObject(str);
 
+        for (int i = 0; i < array.size(); i++) {
+            JSONObject jsonObject = array.getJSONObject(i);
+            System.out.println("第"+ (i+1) +"名"+jsonObject.get("nickname") + "时间为:" + jsonObject.get("score") );
 
-        JSONObject jsonObject = JSONObject.fromObject(str);
+        }
 
-        InquiryClass in = (InquiryClass) JSONObject.toBean(jsonObject,InquiryClass.class);
 
 
         System.out.println(str);
