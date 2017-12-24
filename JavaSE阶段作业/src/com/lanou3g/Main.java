@@ -39,10 +39,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-        initGame();
+      //  initGame();
         Scanner input = new Scanner(System.in);
 
-        GameClass.startGame(easy, TIMES_EASY);
+       // GameClass.startGame(easy, TIMES_EASY);
 
 
        d: while (true) {
@@ -55,15 +55,17 @@ public class Main {
 
 
                       register(input);
-                        try {
-                            RegisterClass.judgeReg(usme);
-                        } catch (IOException e) {
-
-                            continue;
-                        } catch (RegisterException e) {
-                            System.out.println(e.getMessage());
-                            continue ;
-                        }
+                      RegisterClass.jude(usme);
+//                        try {
+//                            RegisterClass.judgeReg(usme);
+//
+//                        } catch (IOException e) {
+//
+//                            continue;
+//                        } catch (RegisterException e) {
+//                            System.out.println(e.getMessage());
+//                            continue ;
+//                        }
                         System.out.println("注册成功");
                         System.out.println(usme);
 
